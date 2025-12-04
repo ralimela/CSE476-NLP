@@ -1,5 +1,6 @@
 from My_prompts import PROMPTS, SYSTEMS
 from My_techniques import apply_cot, majority_vote, self_refine
+from My_utils import detect_domain
 
 def solve(problem):
     """
@@ -8,8 +9,13 @@ def solve(problem):
     optionally add some chain-of-thought cues, run a few model attempts,
     and then clean up the final answer.
     """
-    domain = problem["domain"]
     question = problem["input"]
+    
+    # Figuring out the domain here
+    if "domain" in problem:
+        domain = problem["domain"]
+    else:
+        domain = detect_domain(question)
 
     # Build the base prompt for this domain
     base_prompt = PROMPTS[domain] + "\n\nProblem:\n" + question
