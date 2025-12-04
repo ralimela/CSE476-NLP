@@ -1,25 +1,36 @@
 PROMPTS = {
     "math": (
-        "Solve this math problem carefully and step by step. "
-        "At the end, output ONLY the final numerical answer."
+        "Solve this math problem step by step. Show your reasoning clearly. "
+        "At the end, put your final numerical answer inside \\boxed{}, "
+        "for example: \\boxed{42}"
     ),
 
     "common_sense": (
-        "Answer this question clearly and concisely. "
-        "Output only the final answer, no explanation."
+        "Answer this question directly and concisely. "
+        "Give only the final answer."
     ),
 
     "coding": (
-        "Write ONLY the Python code required for the task. "
-        "Do not explain. Do not add extra text."
+        "Write the Python code to complete this task. "
+        "Return ONLY the code, no explanations or markdown."
     ),
 
     "planning": (
-        "Produce ONLY the required sequence of actions. "
-        "One action per line, no commentary."
+        "Find the sequence of actions to achieve the goal. "
+        "Output one action per line in the format: (action arg1 arg2)"
     ),
 
     "future_prediction": (
-        "Make your best prediction following the required output format exactly."
+        "Make your best prediction based on available information. "
+        "End your answer with \\boxed{your_prediction}"
     ),
+}
+
+# System messages per domain
+SYSTEMS = {
+    "math": "You are a math expert. Think step by step and show your work.",
+    "common_sense": "You are a knowledgeable assistant. Give direct answers.",
+    "coding": "You are an expert Python programmer. Write clean, correct code.",
+    "planning": "You are a planning agent. Output only the action sequence.",
+    "future_prediction": "You are a forecasting assistant. Make reasonable predictions.",
 }
