@@ -90,3 +90,42 @@ def extract_final_answer(text, domain="math"):
         return text
     
     return text
+
+
+def detect_domain(input_text):
+    """
+    Figures out what type of question this is based on keywords.
+    I need this because the test data doesn't tell us the domain.
+    """
+    text_lower = input_text.lower()
+    
+    # Coding questions usually mention functions or have code snippets
+    if 'def task_func' in text_lower or 'write a function' in text_lower:
+        return "coding"
+    if '```python' in text_lower or 'import ' in text_lower:
+        return "coding"
+    
+    # Planning questions have these action words
+    if 'attack object' in text_lower or 'feast object' in text_lower:
+        return "planning"
+    if 'pick up a block' in text_lower or 'unstack a block' in text_lower:
+        return "planning"
+    if 'my goal is to have that' in text_lower:
+        return "planning"
+    
+    # Future prediction questions ask to predict stuff
+    if 'predict future' in text_lower or '请预测' in text_lower:
+        return "future_prediction"
+    if 'make a clear prediction' in text_lower:
+        return "future_prediction"
+    
+    # Math questions have equations or math symbols
+    if '\\frac' in text_lower or '\\sqrt' in text_lower:
+        return "math"
+    if 'find the area' in text_lower or 'find the value' in text_lower:
+        return "math"
+    if 'probability' in text_lower or 'equation' in text_lower:
+        return "math"
+    
+    # If nothing matched, it's probably common sense
+    return "common_sense"
