@@ -22,7 +22,7 @@ OUTPUT_PATH = Path("cse_476_final_project_answers.json")
 
 
 def load_questions(path: Path) -> List[Dict[str, Any]]:
-    with path.open("r") as fp:
+    with open(path, "r", encoding="utf-8") as fp:
         data = json.load(fp)
     if not isinstance(data, list):
         raise ValueError("Input file must contain a list of question objects.")
